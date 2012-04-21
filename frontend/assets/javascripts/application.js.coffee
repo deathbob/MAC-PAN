@@ -37,7 +37,7 @@ $(()->
 		MP.User.set('move', { horiz: data.horiz, vert: data.vert })
 		MP.User.save()
 			
-	$(document).on('keydown', (event)->
+	$(document).on('keyup', (event)->
 		if valid_keys.indexOf(event.which) == -1
 			return false 
 		key = event.which
