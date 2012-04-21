@@ -3,3 +3,5 @@ html, body{ margin:0; padding:0; height:99.9%; width:100%; }
 span.player{ display:block; position:absolute; width:30px; height:30px; background:image-url('ghost.svg') no-repeat; background-size:auto 100%;
 	&.self{ background:image-url('pac-man.svg') no-repeat;  }
 }
+
+div.pellet{ background:#eee; border-radius:3px; height:6px; overflow:hidden; position:absolute; width:6px; }
