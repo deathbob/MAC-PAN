@@ -2,8 +2,11 @@ class Player extends Backbone.View
 	tagName:'span'
 	className:'player'
 	
-	initialize:-> @model.on('change:x change:y', @move)	
-	move:=> @$el.css(top: @model.get('current_y'), left: @model.get('current_x'))		
+	initialize:-> 
+		@model.on('change:current_x', @moveHoriz)
+		@model.on('change:current_y', @moveVert)
+	moveHoriz:=> @$el.css(left: @model.get('current_x'))
+	moveVert:=>	@$el.css(top: @model.get('current_y'))
 	animate:=>
 		
 	render:=>
