@@ -8,7 +8,7 @@ gem "activesupport", ">= 3.1"
 gem "sprockets", "~> 2.0"
 gem "erubis"
 gem "coffee-script", "2.2.0"
-
+gem "tipsy", "0.1.3"
 
 # Thin or mongrel are recommended over Webrick
 # gem "thin"
