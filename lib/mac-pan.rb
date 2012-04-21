@@ -27,7 +27,7 @@ moves = {
 characters = %w(pacman pinky blinky inky clyde)
 
 EventMachine.run {
-  EventMachine::WebSocket.start(:host => "127.0.0.1", :port => 21280) do |ws|
+  EventMachine::WebSocket.start(:host => "0.0.0.0", :port => 8888) do |ws|
     ws.onopen {
       # the 'current' player should have :player => true to separate it from 
       # oppoents.
