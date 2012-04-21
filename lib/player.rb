@@ -1,5 +1,6 @@
 require 'securerandom'
 require 'json'
+require 'matrix'
 
 class Player
   attr_accessor :current_coordinates
@@ -8,6 +9,7 @@ class Player
   attr_accessor :id, :alive, :powered_up
   
   def initialize(character_name)
+    @active = true
     self.id = SecureRandom.uuid
     self.character = character_name
     self.current_direction = nil
@@ -24,5 +26,19 @@ class Player
       character: character,
       id: id
     }
+  end
+
+  def game
+    Game.lookup_by_player_id id
+  end
+
+  def destroy!
+    @active = false
+
+    game.remove_player! id
+  end
+
+  def active?
+    @active
   end
 end
