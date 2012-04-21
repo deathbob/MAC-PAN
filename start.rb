@@ -15,20 +15,25 @@ get '/' do
         };
 
         function echo(str){ 
-          ws.send(str);
+          var obj = {'move': str};
+          obj = JSON.stringify(obj);
+          ws.send(obj);
           $("ul#messages").append("<li>SENT: "+str+"</li>");
         };
 
         $(document).keydown(function(e) {
           switch(e.keyCode) { 
-           // User pressed "up" arrow
            case 38:
             echo('up');
             break;
-
-           // User pressed "down" arrow
            case 40:
              echo('down');
+             break;
+           case 39:
+             echo("right");
+             break;
+           case 37:
+             echo("left");
              break;
           }
         });
@@ -40,4 +45,21 @@ get '/' do
     <ul id="messages"></ul>
   </body>
 </html>}
+end
+
+get '/game' do
+  %Q{<!DOCTYPE html5> 
+<html> 
+    <head> 
+        <script src="/assets/crafty.js" type="text/javascript"></script> 
+        <script src="/assets/game.js" type="text/javascript"></script> 
+    </head> 
+    <body> 
+    </body> 
+</html>}
+end
+
+get '/assets/:file' do |file|
+  file = File.join('.', 'public', 'assets', file)
+  send_file(file)
 end

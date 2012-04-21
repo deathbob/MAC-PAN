@@ -1,2 +1,19 @@
 MAC PAN IS FUCKING RAD.
 
+To start the backend server, which serves the index.html page, "ruby webserver.rb"  
+
+To start the websocket listener, "ruby mac-pan.rb" (serves the data back and forth to the start stub)
+
+
+To start the stub for testing, 'ruby start.rb' (stubs out the up down left right input)
+
+
+################################
+######### IMPORTANT ############
+###
+### to get the compilation stuff working, make sure you pull the most recent stuff from github, then do bundle install
+### Then do "cd frontend" and "bundle exec tipsy"
+
+That will start a server on port 4000 that serves the compiled index.html and sass and js and everything.
+
+################################
