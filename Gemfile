@@ -7,3 +7,4 @@ gem 'json', '1.6.1'
 #gem 'sinatra'
 #gem 'ruby-debug19', :require => "ruby-debug"
 gem 'localtunnel', '0.3'
+gem 'pry'
