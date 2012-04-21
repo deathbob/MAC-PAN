@@ -48,9 +48,7 @@ EventMachine.run {
     ws.onclose { 
       puts "Connection closed" 
 
-      puts state[:players].inspect
-      puts state[:players].delete(sockets[ws.hash])
-      puts state[:players].inspect
+      state[:players].delete(sockets[ws.hash])
 
     }# be nice to delete the player who left from the global state here
     ws.onmessage { |msg|
@@ -62,7 +60,7 @@ EventMachine.run {
     end
       #do somethin
       #ws.send JSON.generate(data)
-      puts data["id"]
+
       # send new coordinates for that character
       
 
@@ -81,7 +79,7 @@ EventMachine.run {
       player = state[:players][data["id"]]
       desired_position = player.current_coordinates + moves[data["move"].intern]
       
-      if (desired_position[0] <= 874 && desired_position[1] <= 570)
+      if (desired_position[0] <= 874 && desired_position[1] <= 570 && desired_position[0] >= 0 && desired_position[1] >= 0)
         player.current_coordinates += moves[data["move"].intern]      
       end
       
