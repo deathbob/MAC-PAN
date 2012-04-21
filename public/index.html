@@ -36,6 +36,13 @@
     <div class="pellet" data-x="2" data-y="4" data-visible="true"></div>
     <div class="pellet" data-x="3" data-y="4" data-visible="true"></div>
     
+    <svg version="1.1" id="pinky" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+    	 width="35.999px" height="43.5px" viewBox="302 458 35.999 43.5" enable-background="new 302 458 35.999 43.5"
+    	 xml:space="preserve">
+    <path fill="#FF4C3F" d="M329.668,458h-18.001L302,465.5v18l1.084,18l8.791-9l8.896,9l8.613-9l8.614,9v-36L329.668,458z
+    	 M314.667,472.1c-1.988,0-3.6-1.611-3.6-3.6s1.61-3.6,3.6-3.6s3.6,1.611,3.6,3.6S316.655,472.1,314.667,472.1z M326.667,472.1
+    	c-1.988,0-3.6-1.611-3.6-3.6s1.61-3.6,3.6-3.6s3.601,1.611,3.601,3.6S328.655,472.1,326.667,472.1z"/>
+    </svg>
     <script>
       $(document).ready(function(){
 
@@ -52,14 +59,20 @@
         });
 
         ws = new WebSocket("ws://localhost:8888");
-        ws.onmessage = function(evt) {$("ul#messages").prepend("<li>RESPONSE: "+evt.data+"</li>");};
+        ws.onmessage = function(evt) {
+          $("ul#messages").prepend("<li>RESPONSE: "+evt.data+"</li>");
+          $("#pinky").
+        };
         ws.onclose = function() { echo("socket closed"); };
         ws.onopen = function() {
           echo("connected...");
         };
 
         function echo(str){ 
-          var obj = {'move': str};
+          var obj = {
+            'move': str,
+            "character": 'pinky'
+          };
           obj = JSON.stringify(obj);
           ws.send(obj);
           $("ul#messages").prepend("<li>SENT: "+str+"</li>");

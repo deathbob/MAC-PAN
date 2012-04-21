@@ -19,3 +19,4 @@ gem "coffee-script", "2.2.0"
 
 # Compass is automatically detected and configured if available
 gem "compass", "~> 0.11"
+gem 'tipsy', '0.1.2'

@@ -5,6 +5,9 @@ require "em-websocket"
 require "ruby-debug"
 require 'json'
 
+
+pinky_position = [0,0]
+
 EventMachine.run {
   EventMachine::WebSocket.start(:host => "127.0.0.1", :port => 8888) do |ws|
     ws.onopen {
@@ -26,7 +29,10 @@ EventMachine.run {
       data = []
     end
       #do somethin
-      ws.send JSON.generate(data)
+      #ws.send JSON.generate(data)
+      # send new coordinates for that character
+      pinky_position[0]  = pinky_position[0] + 1
+      ws.send JSON.generate({:pinky => {:coordinates =>pinky_position}})
     }
   end
 }
