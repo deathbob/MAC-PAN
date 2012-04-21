@@ -7,7 +7,7 @@ class Player extends Backbone.View
 		@model.on('change:current_y', @moveVert)
 		
 	moveHoriz:=> @$el.css(left: @model.get('current_x'))
-	moveVert:=>	@$el.css(top: @model.get('current_y'))
+	moveVert:=>	 @$el.css(top: @model.get('current_y'))
 	animate:=>
 		
 	render:=>

@@ -18,8 +18,12 @@ html,body{ margin:0; padding:0; height:100%; width:100%; background:#444; positi
 }
 
 span.player{ display:block; position:absolute; width:30px; height:30px; 
-	background-size:auto 100%; background:url("/assets/ghost.svg") no-repeat;
-	&.self{ background:url("/assets/pac-man.svg") no-repeat; }
+	background-size:auto 100%; 
+	&.pacman{ background:url("/assets/pac-man.svg") no-repeat; }
+	&.pinky{ background:url("/assets/pinky.svg") no-repeat; } 
+	&.blinky{ background:url("/assets/blinky.svg") no-repeat; }
+	&.inky{ background:url("/assets/inky.svg") no-repeat; }
+	&.clyde{ background:url("/assets/clyde.svg") no-repeat; }
 }
 
 #messages{ background:#fff; height:100%; position:fixed; right:0; top:0; width:150px; z-index:100; }

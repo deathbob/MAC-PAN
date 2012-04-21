@@ -17,7 +17,7 @@
 		config:
 			server:
 				port: 8888
-				host: getHost()
+				host: "macpan.kurbmedia.com"#getHost()
 				path: '/'
 			poll: 100
 )()
@@ -38,7 +38,7 @@ init = ()->
 		MP.User.set('move', { horiz: data.horiz, vert: data.vert })
 		MP.User.save()
 			
-	$(document).on('keydown', (event)->
+	$(document).on('keyup', (event)->
 		if valid_keys.indexOf(event.which) == -1
 			return false 
 		key = event.which
