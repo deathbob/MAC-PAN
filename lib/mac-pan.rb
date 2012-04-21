@@ -76,9 +76,7 @@ EventMachine.run {
 
     ws.onclose { 
       puts "Connection closed" 
-
-      state[:players].delete(sockets[ws.hash])
-
+      # nothing is removing players
     }# be nice to delete the player who left from the global state here
     ws.onmessage { |msg|
       puts "Recieved message: #{msg}"
