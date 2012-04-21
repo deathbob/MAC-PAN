@@ -1,1 +1,6 @@
-html,body{margin:0;padding:0;height:99.9%;width:100%}#board{background:black;width:100%;height:100%;position:relative}span.player{display:block;position:absolute;width:30px;height:30px;background:url("/assets/ghost.svg?1334986861") no-repeat;background-size:auto 100%}span.player.self{background:url("/assets/pac-man.svg?1334986857") no-repeat}
+html,body{margin:0;padding:0;height:99.9%;width:100%}
+#board{background:black;width:100%;height:100%;position:relative}
+span.player{display:block;position:absolute;width:30px;height:30px;background:url("/assets/ghost.svg?1334986861") no-repeat;background-size:auto 100%}
+span.player.self{background:url("/assets/pac-man.svg?1334986857") no-repeat}
+
+.pellet{background:#eee;border-radius:3px;height:6px;overflow:hidden;position:absolute;width:6px;}
