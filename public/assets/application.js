@@ -8686,7 +8686,9 @@ window.Raphael.vml && function (R) {
         if (curr) {
           curr.set(player);
         } else {
-          this.add(new MP.Player(player));
+          curr = new MP.Player(player);
+          curr.view.render();
+          this.add(curr);
         }
       }
       return this.trigger('reset');
@@ -8714,6 +8716,8 @@ window.Raphael.vml && function (R) {
     function Player() {
       this.render = __bind(this.render, this);
 
+      this.setClass = __bind(this.setClass, this);
+
       this.animate = __bind(this.animate, this);
 
       this.moveVert = __bind(this.moveVert, this);
@@ -8729,6 +8733,7 @@ window.Raphael.vml && function (R) {
     Player.prototype.initialize = function() {
       this.model.on('change:current_x', this.moveHoriz);
       this.model.on('change:current_y', this.moveVert);
+      this.model.on('change:current_direction', this.setClass);
       return this.model.on('destroy', this.remove);
     };
 
@@ -8745,6 +8750,10 @@ window.Raphael.vml && function (R) {
     };
 
     Player.prototype.animate = function() {};
+
+    Player.prototype.setClass = function() {
+      return this.$el.removeClass("up down left right").addClass(this.model.get('current_direction'));
+    };
 
     Player.prototype.render = function() {
       Player.__super__.render.apply(this, arguments);

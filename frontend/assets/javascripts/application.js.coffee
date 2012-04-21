@@ -17,8 +17,8 @@
 		config:
 			server:
 				port: 8888
-#				host: "macpan.kurbmedia.com"#getHost()
-				host: getHost()				
+				host: "macpan.kurbmedia.com"#getHost()
+				#host: getHost()
 				path: '/'
 			poll: 100
 )()
