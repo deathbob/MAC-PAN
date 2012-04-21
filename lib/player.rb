@@ -2,6 +2,9 @@ require 'securerandom'
 require 'JSON'
 require 'matrix'
 
+PIXEL_X = 56
+PIXEL_Y = 59
+
 class Player
   attr_accessor :current_coordinates
   attr_accessor :current_direction
@@ -18,8 +21,8 @@ class Player
 
   def as_json
     {
-      current_x: current_coordinates[0],
-      current_y: current_coordinates[1],
+      current_x: (current_coordinates[0] * PIXEL_X),
+      current_y: (current_coordinates[1] * PIXEL_Y),
       current_direction: current_direction,
       character: character,
       id: id

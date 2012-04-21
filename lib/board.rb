@@ -5,7 +5,9 @@ class Board
   end
 
   def move!(old_position, new_position)
-    move_to_square = @layout[new_position.first][new_position.last]
+    puts "\n * moving from #{old_position.inspect} to #{new_position.inspect}\n"
+    move_to_square = lookup(new_position[1], new_position[0])
+    return [0, old_position] if move_to_square.nil?
     if move_to_square.traversible?
       if move_to_square.traverse!
         power_up! if move_to_square.is_a?(PowerUp)
@@ -26,6 +28,17 @@ private
   def power_up!
     @power_up_active = true
     @last_power_up_at = Time.now
+  end
+
+  def lookup(x,y)
+    @layout.each do |row|
+      row.each do |cell|
+        print cell.class.name[0] + " "
+      end
+      puts "\n"
+    end
+
+    @layout[x][y] rescue nil
   end
 
   def load_board_from! txt
