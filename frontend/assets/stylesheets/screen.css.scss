@@ -17,13 +17,25 @@ html,body{ margin:0; padding:0; height:100%; width:100%; background:#444; positi
 	left:50%; margin-left:-450px; top:50%; margin-top:-300px; background-size:100% 100%;
 }
 
-span.player{ display:block; position:absolute; width:40px; height:40px; 
+span.player{ display:block; position:absolute; width:40px; height:40px; position:relative;
 	background-size:auto 100%; -webkit-transition-property:top, left; -webkit-transition-duration:.2s;
 	&.pacman{ background:url("/assets/pac-man.gif") no-repeat; 
 		&.up{ -webkit-transform:rotate(-90deg); }
 		&.down{ -webkit-transform:rotate(90deg); }
 		&.left{ -webkit-transform:rotate(180deg); }
 		&.right{ -webkit-transform:rotate(0deg); }
+	}
+	&:not(.pacman){
+		&:before, &:after{ content:'.'; font-size:30px; position:absolute; top:5%; color:blue; font-weight:bold; }
+		&.up:before, &.up:after{ top:2%; }
+		&.down:before, &.down:after{ top:3%; }
+		&.up:before, &.down:before{ left:15%; }
+		&.up:after, &.down:after{ right:22%; }
+		&.right:before, &.right:after, &.left:before, &.left:after{ top:2%; }
+		&.left:before{ left:12%; }
+		&.left:after{ right:25%; }
+		&.right:before{ left:17%; }
+		&.right:after{ right:25%; }
 	}
 	&.pinky{ background:url("/assets/pinky.png") no-repeat; } 
 	&.blinky{ background:url("/assets/blinky.png") no-repeat; }
