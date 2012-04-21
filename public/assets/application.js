@@ -9,7 +9,7 @@
     return MP = window.MP = {
       config: {
         server: {
-          port: 21280,
+          port: 8888,
           host: getHost(),
           path: '/'
         },
