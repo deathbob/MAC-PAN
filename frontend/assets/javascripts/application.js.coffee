@@ -11,11 +11,13 @@
 #= require ./players/view
 
 (->
+	getHost = ()-> window.location.host.toString().split(":").shift()
+	
 	MP = window.MP =
 		config:
 			server:
 				port: 8888
-				host: 'localhost'
+				host: getHost()
 				path: '/'
 			poll: 100
 )()
@@ -55,5 +57,5 @@ init = ()->
 
 
 $(()->
-	
+	init()
 );
