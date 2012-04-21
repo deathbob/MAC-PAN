@@ -1,5 +1,6 @@
-require "bundler/setup"
-Bundler.setup
+require 'bundler/setup'
+Bundler.require(:default)
+
 $LOAD_PATH.unshift(File.dirname(__FILE__))  
 
 require "eventmachine"
