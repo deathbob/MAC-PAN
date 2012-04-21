@@ -2756,7 +2756,7 @@
       MP.mediator.on('receive', this.receive);
       return this.connection || (this.connection = new MP.Socket({
         host: 'localhost',
-        port: 8080,
+        port: 8888,
         path: ''
       }));
     };

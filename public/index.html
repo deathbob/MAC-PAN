@@ -9,7 +9,45 @@
 <script src="/assets/application.js"></script>
 <link href="/assets/screen.css" rel="stylesheet" media="screen" />
 <body>
+  <ul id='messages'></ul>
 	<div id="board">
+	  
+    <script>
+      $(document).ready(function(){
+
+        ws = new WebSocket("ws://localhost:8888");
+        ws.onmessage = function(evt) { $("ul#messages").prepend("<li>RESPONSE: "+evt.data+"</li>"); };
+        ws.onclose = function() { echo("socket closed"); };
+        ws.onopen = function() {
+          echo("connected...");
+        };
+
+        function echo(str){ 
+          var obj = {'move': str};
+          obj = JSON.stringify(obj);
+          ws.send(obj);
+          $("ul#messages").prepend("<li>SENT: "+str+"</li>");
+        };
+
+        $(document).keydown(function(e) {
+          switch(e.keyCode) { 
+           case 38:
+            echo('up');
+            break;
+           case 40:
+             echo('down');
+             break;
+           case 39:
+             echo("right");
+             break;
+           case 37:
+             echo("left");
+             break;
+          }
+        });
+      });
+    </script>
+	  
 </div>
 </body>
 </html>
