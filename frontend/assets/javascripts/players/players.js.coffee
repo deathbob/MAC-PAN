@@ -14,7 +14,10 @@ class Players extends Backbone.Collection
 			curr = @get(player.id)
 			if curr 
 				curr.set(player)
-			else @add(new MP.Player(player))
+			else 
+				curr = new MP.Player(player)
+				curr.view.render()
+				@add(curr)
 		@trigger('reset')
 	
 MP.Players = Players

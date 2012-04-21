@@ -17,9 +17,14 @@ html,body{ margin:0; padding:0; height:100%; width:100%; background:#444; positi
 	left:50%; margin-left:-450px; top:50%; margin-top:-300px; background-size:100% 100%;
 }
 
-span.player{ display:block; position:absolute; width:30px; height:30px; 
-	background-size:auto 100%; 
-	&.pacman{ background:url("/assets/pac-man.svg") no-repeat; }
+span.player{ display:block; position:absolute; width:40px; height:40px; 
+	background-size:auto 100%; -webkit-transition-property:top, left; -webkit-transition-duration:.2s;
+	&.pacman{ background:url("/assets/pac-man.gif") no-repeat; 
+		&.up{ -webkit-transform:rotate(-90deg); }
+		&.down{ -webkit-transform:rotate(90deg); }
+		&.left{ -webkit-transform:rotate(180deg); }
+		&.right{ -webkit-transform:rotate(0deg); }
+	}
 	&.pinky{ background:url("/assets/pinky.svg") no-repeat; } 
 	&.blinky{ background:url("/assets/blinky.svg") no-repeat; }
 	&.inky{ background:url("/assets/inky.svg") no-repeat; }
