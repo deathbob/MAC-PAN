@@ -1,0 +1,24 @@
+/* from Eric Meyer: v2.0b1 | 201101 */
+a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, p, pre, q, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video{border:0;font:inherit;font-size:100%;margin:0;outline:0;padding:0;vertical-align:baseline}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section{display:block}
+body{line-height:1}
+ol, ul{list-style:none}
+blockquote, q{quotes:none}
+blockquote:before, blockquote:after, q:before, q:after{content:'';content:none}
+ins{text-decoration:none}
+del{text-decoration:line-through}
+table{border-collapse:collapse;border-spacing:0}
+/* end of Eric Meyer's CSS Reset */
+
+body, input, select, textarea{font-family:'helvetica neue',helvetica,arial,sans-serif;font-size:11px;line-height:18px}
+
+html,body{margin:0;padding:0;height:99.9%;width:100%;background:black}
+#board{background:black;width:100%;height:100%;position:relative}
+span.player{display:block;position:absolute;width:30px;height:30px;background:url("/assets/ghost.svg?1334986861") no-repeat;background-size:auto 100%}
+span.player.self{background:url("/assets/pac-man.svg?1334986857") no-repeat}
+
+.pellet{background:#eee;border-radius:3px;height:6px;overflow:hidden;position:absolute;width:6px;}
+
+#messages{background:#fff;height:100%;position:fixed;right:0;top:0;width:150px;z-index:100}
