@@ -25,8 +25,8 @@ span.player{ display:block; position:absolute; width:40px; height:40px;
 		&.left{ -webkit-transform:rotate(180deg); }
 		&.right{ -webkit-transform:rotate(0deg); }
 	}
-	&.pinky{ background:url("/assets/pinky.svg") no-repeat; } 
-	&.blinky{ background:url("/assets/blinky.svg") no-repeat; }
-	&.inky{ background:url("/assets/inky.svg") no-repeat; }
-	&.clyde{ background:url("/assets/clyde.svg") no-repeat; }
+	&.pinky{ background:url("/assets/pinky.png") no-repeat; } 
+	&.blinky{ background:url("/assets/blinky.png") no-repeat; }
+	&.inky{ background:url("/assets/inky.png") no-repeat; }
+	&.clyde{ background:url("/assets/clyde.png") no-repeat; }
 }
