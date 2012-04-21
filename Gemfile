@@ -1,3 +1,4 @@
 source :rubygems
 
-gem 'goliath'
+gem 'eventmachine'
+gem 'em-websocket'
