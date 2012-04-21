@@ -16,7 +16,7 @@
 	MP = window.MP =
 		config:
 			server:
-				port: 8888
+				port: 21280
 				host: getHost()
 				path: '/'
 			poll: 100
