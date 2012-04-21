@@ -1,13 +1,18 @@
 class Player extends Backbone.Model
-	sync:-> MP.Players.sync()
+	socket: null
 	defaults: 
-		x: 0, 
-		y: 0, 
-		player: false 
-		move: { horiz: null, vert: null }
+		current_x: 0 
+		current_y: 0
+		move: null
+		character: null
+		current_direction: null
 	
 	initialize:-> 
 		@view = new MP.PlayerView(model: @)
-		@view.render()
+		@view.render()		
+		MP.mediator.on('data:create', @setup)
+	
+	setup:(data)=> @set(data)
+	save:()=> MP.Socket.send('update', @toJSON())
 	
 MP.Player = Player

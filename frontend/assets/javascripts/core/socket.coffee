@@ -1,16 +1,20 @@
 class Socket
 	connection: null
-	channel: null
 	constructor: (options)->
 		@connection ||= new WebSocket("ws://#{options.host}:#{options.port}/#{options.path}")
-		@channel = "root"
 		@connection.onmessage = @receive
+		#@connection.onclose 	= @destroy
+	
+	destroy: (player) => @send('destroy', player.toJSON())
 	
 	receive: (message)=> 
-		console.log "Received: #{message.data}"
-		MP.mediator.trigger "receive", [message.data]
+		data = JSON.parse(message.data)
+		type = data.type
+		console.log "Received #{message.data}"
+		MP.mediator.trigger "data:#{type}", data.data
 		
-	send: (message)=> 
+	send: (type, data)=> 
+		message = JSON.stringify(_.extend({type:'update'}, data))
 		console.log "Send: #{message}"
 		@connection.send(message)
 		

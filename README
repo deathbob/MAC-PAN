@@ -17,3 +17,20 @@ To start the stub for testing, 'ruby start.rb' (stubs out the up down left right
 That will start a server on port 4000 that serves the compiled index.html and sass and js and everything.
 
 ################################
+
+
+
+we're deploying on brent's server (bob and brent have their keys out there to deploy)
+
+ssh webmin@dev1.kurbmedia.com -p21281
+ 
+and synching with sftp.
+
+
+SSH IN and pull with git
+
+/apps/macpan
+
+git pull origin deploy (make sure you're on the deploy branch on the server)
+run bundle to pull new gems etc.
+

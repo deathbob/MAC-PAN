@@ -1,16 +1,12 @@
 (function() {
-  var init;
 
   (function() {
-    var MP, getHost;
-    getHost = function() {
-      return window.location.host.toString().split(":").shift();
-    };
+    var MP;
     return MP = window.MP = {
       config: {
         server: {
           port: 8888,
-          host: getHost(),
+          host: 'localhost',
           path: '/'
         },
         poll: 100
@@ -18,7 +14,7 @@
     };
   })();
 
-  init = function() {
+  $(function() {
     var valid_keys;
     valid_keys = [38, 37, 40, 39];
     MP.Board = new MP.Board();
@@ -59,10 +55,6 @@
       MP.User.set('move', move);
       return MP.User.save();
     });
-  };
-
-  $(function() {
-    return init();
   });
 
 }).call(this);

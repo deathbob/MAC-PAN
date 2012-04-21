@@ -2,12 +2,19 @@ class Player extends Backbone.View
 	tagName:'span'
 	className:'player'
 	
-	initialize:-> @model.on('change:x change:y', @move)	
-	move:=> @$el.css(top: @model.get('y'), left: @model.get('x'))		
+	initialize:-> 
+		@model.on('change:current_x', @moveHoriz)
+		@model.on('change:current_y', @moveVert)
+		
+	moveHoriz:=> @$el.css(left: @model.get('current_x'))
+	moveVert:=>	@$el.css(top: @model.get('current_y'))
+	animate:=>
+		
 	render:=>
 		super
 		$('#board').append(@$el)
-		@$el.addClass("self") if @model.get('player')
-		@move()
+		@$el.addClass(@model.get("type"))
+		@moveHoriz()
+		@moveVert()
 		
 MP.PlayerView = Player

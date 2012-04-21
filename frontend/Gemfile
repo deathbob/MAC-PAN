@@ -15,7 +15,7 @@ gem "tipsy", "0.1.2"
 
 # Uglifier is recommended for javascript compression. If unavailable, Google's online 
 # closure compiler will be used.
-#gem 'uglifier'
+gem 'uglifier'
 
 # Compass is automatically detected and configured if available
 gem "compass", "~> 0.11"
