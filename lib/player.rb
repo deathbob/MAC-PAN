@@ -1,5 +1,5 @@
 require 'securerandom'
-require 'JSON'
+require 'json'
 require 'matrix'
 
 class Player
