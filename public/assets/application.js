@@ -1,4 +1,5 @@
 (function() {
+  var init;
 
   (function() {
     var MP;
@@ -14,7 +15,7 @@
     };
   })();
 
-  $(function() {
+  init = function() {
     var valid_keys;
     valid_keys = [38, 37, 40, 39];
     MP.Board = new MP.Board();
@@ -55,7 +56,9 @@
       MP.User.set('move', move);
       return MP.User.save();
     });
-  });
+  };
+
+  $(function() {});
 
 }).call(this);
 //     Underscore.js 1.3.3
