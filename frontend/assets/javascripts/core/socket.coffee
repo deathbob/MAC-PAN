@@ -6,7 +6,12 @@ class Socket
 		@channel = "root"
 		@connection.onmessage = @receive
 	
-	receive: (message)=> MP.mediator.trigger "receive", [message.data]
-	send: (message)=> @connection.send(message)
+	receive: (message)=> 
+		console.log "Received: #{message.data}"
+		MP.mediator.trigger "receive", [message.data]
+		
+	send: (message)=> 
+		console.log "Send: #{message}"
+		@connection.send(message)
 		
 MP.Socket = Socket

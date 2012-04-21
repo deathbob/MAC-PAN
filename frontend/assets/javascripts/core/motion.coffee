@@ -27,9 +27,12 @@ class Motion
 				MP.mediator.unsubscribe type, handler
 			
 	onDeviceMotion: (event) =>
-		ax = event.accelerationIncludingGravity.x
-		ay = -event.accelerationIncludingGravity.y
-		MP.mediator.trigger('devicemotion', { x: ax, y: ay });
+		ax = event.accelerationIncludingGravity.x.toFixed(1);
+		ay = -event.accelerationIncludingGravity.y.toFixed(1);
+		az = event.accelerationIncludingGravity.z.toFixed(1);
+		tilt = if ay < 0 then "L" else "R"
+		yaw  = if -ax < 4.5  then "U" else "D"
+		MP.mediator.trigger 'devicemotion', { x: ax, y: ay, z: az, horiz: tilt, vert: yaw }
 
 	onOrientationChange: (event) =>
 		orient = if Math.abs(window.orientation) == 90 then 'landscape' else 'portrait'

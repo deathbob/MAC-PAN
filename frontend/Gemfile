@@ -18,4 +18,4 @@ gem "coffee-script", "2.2.0"
 gem 'uglifier'
 
 # Compass is automatically detected and configured if available
-# gem "compass", "~> 0.11"
+gem "compass", "~> 0.11"

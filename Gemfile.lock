@@ -13,6 +13,7 @@ GEM
       eventmachine (>= 0.12.9)
     escape_utils (0.2.4)
     eventmachine (0.12.10)
+    json (1.6.1)
     linecache19 (0.5.12)
       ruby_core_source (>= 0.1.4)
     ruby-debug-base19 (0.11.25)
@@ -33,4 +34,5 @@ DEPENDENCIES
   em-http-request
   em-websocket
   eventmachine
+  json (= 1.6.1)
   ruby-debug19

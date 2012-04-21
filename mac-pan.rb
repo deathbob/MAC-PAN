@@ -3,18 +3,26 @@ Bundler.setup
 require "eventmachine"
 require "em-websocket"
 require "ruby-debug"
+require 'json'
 
 EventMachine.run {
-    EventMachine::WebSocket.start(:host => "127.0.0.1", :port => 8080) do |ws|
-        ws.onopen {
-          puts "Mac-Pan connection open"
-          ws.send "You have hit Mac-Pan"
-        }
+  EventMachine::WebSocket.start(:host => "127.0.0.1", :port => 8080) do |ws|
+    ws.onopen {
+      # the 'current' player should have :player => true to separate it from 
+      # oppoents.
+      puts "Mac-Pan connection open"
+      ws.send JSON.generate([
+        { :id => 1, :player => true, :x => 10, :y => 10 },
+        { :id => 2, :player => false, :x => 50, :y => 50 }
+      ])
+    }
 
-        ws.onclose { puts "Connection closed" }
-        ws.onmessage { |msg|
-          puts "Recieved message: #{msg}"
-          ws.send "Pong: #{msg}"
-        }
-    end
+    ws.onclose { puts "Connection closed" }
+    ws.onmessage { |msg|
+      puts "Recieved message: #{msg}"
+      data = JSON.parse(msg)
+      #do somethin
+      ws.send JSON.generate(data)
+    }
+  end
 }
