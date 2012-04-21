@@ -13,8 +13,8 @@ body, input, select, textarea{ font-family:'Helvetica Neue', Helvetica, Arial, s
 
 html,body{ margin:0; padding:0; height:100%; width:100%; background:#444; position:relative; }
 
-#board{ background:black; height:600px; width:900px; position:relative; margin:0 auto; border-radius:10px; position:absolute; 
-	left:50%; margin-left:-450px; top:50%; margin-top:-300px;
+#board{ background:black image-url('level-map.svg'); height:600px; width:900px; position:relative; margin:0 auto; border-radius:10px; position:absolute; 
+	left:50%; margin-left:-450px; top:50%; margin-top:-300px; background-size:100% 100%;
 }
 
 span.player{ display:block; position:absolute; width:30px; height:30px; 
@@ -25,5 +25,3 @@ span.player{ display:block; position:absolute; width:30px; height:30px;
 	&.inky{ background:url("/assets/inky.svg") no-repeat; }
 	&.clyde{ background:url("/assets/clyde.svg") no-repeat; }
 }
-
-#messages{ background:#fff; height:100%; position:fixed; right:0; top:0; width:150px; z-index:100; }
