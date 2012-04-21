@@ -12,6 +12,7 @@ css_path         = "/assets"
 fonts_path       = "/fonts"
 
 # On compile, use this folder. Accepts either a relative or absolute path
+#compile_to  =  File.expand_path(File.join([File.dirname(__FILE__), '..', 'public']))
 compile_to = File.expand_path('../../public', __FILE__)
 
 # Static files and assets will be served from this location

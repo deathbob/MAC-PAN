@@ -30,7 +30,7 @@ GEM
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
     tilt (1.3.3)
-    tipsy (0.1.3)
+    tipsy (0.1.2)
       activesupport (>= 3.1)
       erubis (~> 2.7)
       hike (~> 1.2)
@@ -57,5 +57,9 @@ DEPENDENCIES
   sass (~> 3.1)
   sprockets (~> 2.0)
   tilt (~> 1.3)
+<<<<<<< HEAD
+  tipsy (= 0.1.2)
+=======
   tipsy (= 0.1.3)
   uglifier
+>>>>>>> 27ef67e23b1ca2dd557e3e9b08c753450bb3a5a5

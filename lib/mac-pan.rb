@@ -59,7 +59,7 @@ EventMachine.run {
       player = state[:players][data["id"]]
       player.current_coordinates += moves[data["move"].intern]
 
-      ws.send JSON.generate({:type => 'update', :data => [player.as_json]})
+      ws.send JSON.generate({:type => 'update', :data => state[:players].map{|k, v| v.as_json}})
     }
   end
 }
