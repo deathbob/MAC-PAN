@@ -46,3 +46,20 @@ get '/' do
   </body>
 </html>}
 end
+
+get '/game' do
+  %Q{<!DOCTYPE html5> 
+<html> 
+    <head> 
+        <script src="/assets/crafty.js" type="text/javascript"></script> 
+        <script src="/assets/game.js" type="text/javascript"></script> 
+    </head> 
+    <body> 
+    </body> 
+</html>}
+end
+
+get '/assets/:file' do |file|
+  file = File.join('.', 'public', 'assets', file)
+  send_file(file)
+end
