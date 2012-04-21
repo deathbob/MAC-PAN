@@ -83,7 +83,7 @@ EventMachine.run {
         clients.each do |other|
           other.send JSON.generate({ :type => "destroy",  :data => v.as_json })
         end
-        characters.unshift v.character
+        characters.push(v.character).uniq!
       end
       state[:players].delete(id) if id
     }

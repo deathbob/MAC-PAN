@@ -8603,6 +8603,8 @@ window.Raphael.vml && function (R) {
       return Player.__super__.constructor.apply(this, arguments);
     }
 
+    Player.prototype.sync = function() {};
+
     Player.prototype.socket = null;
 
     Player.prototype.defaults = {
@@ -8657,6 +8659,8 @@ window.Raphael.vml && function (R) {
 
     Players.prototype.model = MP.Player;
 
+    Players.prototype.sync = function() {};
+
     Players.prototype.initialize = function() {
       MP.mediator.on('data:update', this.receive);
       return MP.mediator.on('data:destroy', this.drop);
@@ -8672,7 +8676,6 @@ window.Raphael.vml && function (R) {
 
     Players.prototype.receive = function(data) {
       var curr, player, _i, _len;
-      console.log(data);
       for (_i = 0, _len = data.length; _i < _len; _i++) {
         player = data[_i];
         curr = this.get(player.id);
@@ -8708,6 +8711,8 @@ window.Raphael.vml && function (R) {
 
     function Player() {
       this.render = __bind(this.render, this);
+
+      this.remove = __bind(this.remove, this);
 
       this.setClass = __bind(this.setClass, this);
 
@@ -8746,6 +8751,11 @@ window.Raphael.vml && function (R) {
 
     Player.prototype.setClass = function() {
       return this.$el.removeClass("up down left right").addClass(this.model.get('current_direction'));
+    };
+
+    Player.prototype.remove = function() {
+      Player.__super__.remove.apply(this, arguments);
+      return delete this.model;
     };
 
     Player.prototype.render = function() {

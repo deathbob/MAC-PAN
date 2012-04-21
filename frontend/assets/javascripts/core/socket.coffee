@@ -7,7 +7,7 @@ class Socket
 	receive: (message)=> 
 		data = JSON.parse(message.data)
 		type = data.type
-		console.log(message.data)
+		#console.log(message.data)
 		MP.mediator.trigger "data:#{type}", data.data
 		
 	send: (type, data)=> 
