@@ -1,5 +1,4 @@
 (function() {
-  var init;
 
   (function() {
     var MP, getHost;
@@ -18,7 +17,7 @@
     };
   })();
 
-  init = function() {
+  $(function() {
     var valid_keys;
     valid_keys = [38, 37, 40, 39];
     MP.Board = new MP.Board();
@@ -61,10 +60,6 @@
         return MP.User.save();
       }
     });
-  };
-
-  $(function() {
-    return init();
   });
 
 }).call(this);
@@ -8677,6 +8672,7 @@ window.Raphael.vml && function (R) {
 
     Players.prototype.receive = function(data) {
       var curr, player, _i, _len;
+      console.log(data);
       for (_i = 0, _len = data.length; _i < _len; _i++) {
         player = data[_i];
         curr = this.get(player.id);
