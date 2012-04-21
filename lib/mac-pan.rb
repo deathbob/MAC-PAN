@@ -81,7 +81,7 @@ EventMachine.run {
       state[:players].each do |k, v|
         id = k if v.ws == ws
         clients.each do |other|
-          other.send JSON.generate({ :type => "destroy",  :data => v })
+          other.send JSON.generate({ :type => "destroy",  :data => v.as_json })
         end
         characters.unshift v.character
       end
