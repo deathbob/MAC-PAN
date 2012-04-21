@@ -15,6 +15,7 @@ html,body{ margin:0; padding:0; height:100%; width:100%; background:#444; positi
 
 #board{ background:black image-url('level-map.svg'); height:600px; width:900px; position:relative; margin:0 auto; border-radius:10px; position:absolute; 
 	left:50%; margin-left:-450px; top:50%; margin-top:-300px; background-size:100% 100%;
+	&.splash{ background:image-url('splash.png') center no-repeat; }
 }
 
 span.player{ display:block; position:absolute; width:40px; height:40px; position:relative;
