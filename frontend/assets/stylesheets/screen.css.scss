@@ -27,14 +27,14 @@ span.player{ display:block; position:absolute; width:40px; height:40px; position
 	}
 	&:not(.pacman){
 		&:before, &:after{ content:'.'; font-size:30px; position:absolute; top:5%; color:blue; font-weight:bold; }
-		&.up:before, &.up:after{ top:2%; }
+		&.up:before, &.up:after{ top:1%; }
 		&.down:before, &.down:after{ top:3%; }
 		&.up:before, &.down:before{ left:15%; }
-		&.up:after, &.down:after{ right:22%; }
+		&.up:after, &.down:after{ right:35%; }
 		&.right:before, &.right:after, &.left:before, &.left:after{ top:2%; }
-		&.left:before{ left:12%; }
-		&.left:after{ right:25%; }
-		&.right:before{ left:17%; }
+		&.left:before{ left:8%; }
+		&.left:after{ right:40%; }
+		&.right:before{ left:20%; }
 		&.right:after{ right:25%; }
 	}
 	&.pinky{ background:url("/assets/pinky.png") no-repeat; } 

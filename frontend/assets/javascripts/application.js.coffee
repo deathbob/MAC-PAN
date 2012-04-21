@@ -23,7 +23,7 @@
 			poll: 100
 )()
 
-init = ()->
+$(()->
 	valid_keys = [38, 37, 40, 39]
 	
 	MP.Board	 = new MP.Board()
@@ -31,7 +31,7 @@ init = ()->
 	MP.Motion  = new MP.Motion()
 	MP.Players = new MP.Players()	
 	MP.Socket  = new MP.Socket(MP.config.server)
-	MP.Players.add(MP.Usert
+	MP.Players.add(MP.User)
 	
 	MP.mediator.on 'devicemotion', (data)->
 		return false if MP.User is null
@@ -39,7 +39,7 @@ init = ()->
 		MP.User.set('move', { horiz: data.horiz, vert: data.vert })
 		MP.User.save()
 			
-	$(document).on('keyup', (event)->
+	$(document).on 'keyup', (event)->
 		if valid_keys.indexOf(event.which) == -1
 			return false 
 		key = event.which
@@ -56,9 +56,4 @@ init = ()->
 		if MP.User.get('current_direction') != move
 			MP.User.set('move', move)
 			MP.User.save()
-	)
-
-
-$(()->
-	init()
-);
+)
