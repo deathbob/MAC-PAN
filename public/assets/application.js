@@ -2,12 +2,15 @@
   var init;
 
   (function() {
-    var MP;
+    var MP, getHost;
+    getHost = function() {
+      return window.location.host.toString().split(":").shift();
+    };
     return MP = window.MP = {
       config: {
         server: {
           port: 8888,
-          host: 'localhost',
+          host: getHost(),
           path: '/'
         },
         poll: 100
@@ -58,7 +61,9 @@
     });
   };
 
-  $(function() {});
+  $(function() {
+    return init();
+  });
 
 }).call(this);
 //     Underscore.js 1.3.3
