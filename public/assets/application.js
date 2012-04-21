@@ -10,7 +10,7 @@
       config: {
         server: {
           port: 8888,
-          host: getHost(),
+          host: "macpan.kurbmedia.com",
           path: '/'
         },
         poll: 100
@@ -40,7 +40,7 @@
       });
       return MP.User.save();
     });
-    return $(document).on('keydown', function(event) {
+    return $(document).on('keyup', function(event) {
       var key, move;
       if (valid_keys.indexOf(event.which) === -1) {
         return false;
@@ -56,8 +56,10 @@
       } else if (key === 40) {
         move = 'down';
       }
-      MP.User.set('move', move);
-      return MP.User.save();
+      if (MP.User.get('current_direction') !== move) {
+        MP.User.set('move', move);
+        return MP.User.save();
+      }
     });
   };
 
@@ -8523,15 +8525,9 @@ window.Raphael.vml && function (R) {
       this.send = __bind(this.send, this);
 
       this.receive = __bind(this.receive, this);
-
-      this.destroy = __bind(this.destroy, this);
       this.connection || (this.connection = new WebSocket("ws://" + options.host + ":" + options.port + "/" + options.path));
       this.connection.onmessage = this.receive;
     }
-
-    Socket.prototype.destroy = function(player) {
-      return this.send('destroy', player.toJSON());
-    };
 
     Socket.prototype.receive = function(message) {
       var data, type;
@@ -8558,59 +8554,10 @@ window.Raphael.vml && function (R) {
 
 }).call(this);
 (function() {
-  var Board, rects,
+  var Board,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
-
-  rects = [
-    {
-      x: 64,
-      y: 64,
-      w: 100,
-      h: 110
-    }, {
-      x: 64,
-      y: 245,
-      w: 100,
-      h: 295
-    }, {
-      x: 232,
-      y: 64,
-      w: 100,
-      h: 295
-    }, {
-      x: 232,
-      y: 430,
-      w: 100,
-      h: 110
-    }, {
-      x: 400,
-      y: 64,
-      w: 100,
-      h: 110
-    }, {
-      x: 400,
-      y: 245,
-      w: 268,
-      h: 112
-    }, {
-      x: 400,
-      y: 430,
-      w: 100,
-      h: 110
-    }, {
-      x: 570,
-      y: 64,
-      w: 100,
-      h: 110
-    }, {
-      x: 570,
-      y: 64,
-      w: 100,
-      h: 110
-    }
-  ];
 
   Board = (function(_super) {
 
@@ -8625,6 +8572,8 @@ window.Raphael.vml && function (R) {
 
     Board.prototype.el = "#board";
 
+    Board.prototype.box = {};
+
     Board.prototype.paper = null;
 
     Board.prototype.initialize = function() {
@@ -8632,20 +8581,7 @@ window.Raphael.vml && function (R) {
     };
 
     Board.prototype.render = function() {
-      var rect, shape, _i, _len, _results;
-      Board.__super__.render.apply(this, arguments);
-      this.paper = Raphael(this.el);
-      _results = [];
-      for (_i = 0, _len = rects.length; _i < _len; _i++) {
-        rect = rects[_i];
-        shape = this.paper.rect(rect.x, rect.y, rect.w, rect.h, 10);
-        _results.push(shape.attr({
-          'stroke-width': 2,
-          'stroke': 'white',
-          'fill': 'blue'
-        }));
-      }
-      return _results;
+      return Board.__super__.render.apply(this, arguments);
     };
 
     return Board;
@@ -8688,12 +8624,12 @@ window.Raphael.vml && function (R) {
       this.view = new MP.PlayerView({
         model: this
       });
-      this.view.render();
       return MP.mediator.on('data:create', this.setup);
     };
 
     Player.prototype.setup = function(data) {
-      return this.set(data);
+      this.set(data);
+      return this.view.render();
     };
 
     Player.prototype.save = function() {
@@ -8721,13 +8657,24 @@ window.Raphael.vml && function (R) {
 
     function Players() {
       this.receive = __bind(this.receive, this);
+
+      this.drop = __bind(this.drop, this);
       return Players.__super__.constructor.apply(this, arguments);
     }
 
     Players.prototype.model = MP.Player;
 
     Players.prototype.initialize = function() {
-      return MP.mediator.on('data:update', this.receive);
+      MP.mediator.on('data:update', this.receive);
+      return MP.mediator.on('data:destroy', this.drop);
+    };
+
+    Players.prototype.drop = function(data) {
+      var player;
+      player = this.get(data.id);
+      if (player) {
+        return player.destroy();
+      }
     };
 
     Players.prototype.receive = function(data) {
@@ -8781,7 +8728,8 @@ window.Raphael.vml && function (R) {
 
     Player.prototype.initialize = function() {
       this.model.on('change:current_x', this.moveHoriz);
-      return this.model.on('change:current_y', this.moveVert);
+      this.model.on('change:current_y', this.moveVert);
+      return this.model.on('destroy', this.remove);
     };
 
     Player.prototype.moveHoriz = function() {
@@ -8801,7 +8749,7 @@ window.Raphael.vml && function (R) {
     Player.prototype.render = function() {
       Player.__super__.render.apply(this, arguments);
       $('#board').append(this.$el);
-      this.$el.addClass(this.model.get("type"));
+      this.$el.addClass(this.model.get("character"));
       this.moveHoriz();
       return this.moveVert();
     };
