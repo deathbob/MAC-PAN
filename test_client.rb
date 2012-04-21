@@ -6,7 +6,7 @@ EventMachine.run {
 
   http.errback { puts "oops" }
   http.callback {
-    puts "WebSocket connected!"
+    puts "Ready for input!"
   }
 
   http.stream { |msg|
