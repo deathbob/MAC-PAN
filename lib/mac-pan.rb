@@ -18,7 +18,7 @@ state = {
 }
 
 pinky_position = Vector[0,0]
-scale = 3
+scale = 7
 moves = {
   :up => Vector[0,-scale],
   :down => Vector[0,scale],
@@ -30,10 +30,8 @@ clients = []
 
 Thread.new do
   while true
-    puts state.inspect
     # apply momentum (and do other game state updates)
     state[:players].each do |k, v|
-      puts k
       begin
         v.current_coordinates += moves[v.last_move.intern] if v.last_move
         pos = v.current_coordinates.to_a
@@ -42,7 +40,6 @@ Thread.new do
           pos[i] = MAP_SIZE[i] if v.current_coordinates[i] > MAP_SIZE[i]
         end
         v.current_coordinates = Vector[pos[0], pos[1]]
-        puts v.current_coordinates.class.to_s
       rescue
         puts $!
       end
@@ -52,8 +49,6 @@ Thread.new do
     state[:players].each do |k, v|
 
       v.ws.send JSON.generate({:type => 'update', :data => state[:players].map{|k, v| v.as_json}})
-      puts k
-      puts v.ws
     end
 
     sleep TICK_SIZE
@@ -61,6 +56,7 @@ Thread.new do
 end
 
 EventMachine.run {
+  puts "\nReady for action!"
   EventMachine::WebSocket.start(:host => "0.0.0.0", :port => 8888) do |ws|
     ws.onopen {
       # the 'current' player should have :player => true to separate it from 
@@ -94,10 +90,6 @@ EventMachine.run {
     rescue
       data = []
     end
-      player = state[:players][data["id"]]
-      
-
-      puts data["move"]
       player = state[:players][data["id"]]
       player.last_move = data["move"]
     }
