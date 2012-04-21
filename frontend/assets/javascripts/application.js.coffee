@@ -23,7 +23,7 @@
 			poll: 100
 )()
 
-$(()->
+init = ()->
 	valid_keys = [38, 37, 40, 39]
 	
 	MP.Board	 = new MP.Board()
@@ -56,4 +56,10 @@ $(()->
 		if MP.User.get('current_direction') != move
 			MP.User.set('move', move)
 			MP.User.save()
+			
+$(()->
+	$("#board").one 'click', (event)->
+		$('#board').removeClass('splash')
+		$('#muzak').get(0).play();
+		init()
 )
