@@ -1,2 +1,11 @@
 MAC PAN IS FUCKING RAD.
 
+To start the backend server, which serves the index.html page, "ruby webserver.rb"  
+
+To start the websocket listener, "ruby mac-pan.rb" (serves the data back and forth to the start stub)
+
+
+To start the stub for testing, 'ruby start.rb' (stubs out the up down left right input)
+
+
+

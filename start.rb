@@ -15,20 +15,25 @@ get '/' do
         };
 
         function echo(str){ 
-          ws.send(str);
+          var obj = {'move': str};
+          obj = JSON.stringify(obj);
+          ws.send(obj);
           $("ul#messages").append("<li>SENT: "+str+"</li>");
         };
 
         $(document).keydown(function(e) {
           switch(e.keyCode) { 
-           // User pressed "up" arrow
            case 38:
             echo('up');
             break;
-
-           // User pressed "down" arrow
            case 40:
              echo('down');
+             break;
+           case 39:
+             echo("right");
+             break;
+           case 37:
+             echo("left");
              break;
           }
         });

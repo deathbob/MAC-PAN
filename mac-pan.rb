@@ -20,7 +20,11 @@ EventMachine.run {
     ws.onclose { puts "Connection closed" }
     ws.onmessage { |msg|
       puts "Recieved message: #{msg}"
+    begin
       data = JSON.parse(msg)
+    rescue
+      data = []
+    end
       #do somethin
       ws.send JSON.generate(data)
     }
