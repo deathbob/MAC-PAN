@@ -1,9 +1,9 @@
 #= require_self
 #= require ./vendor/underscore
 #= require ./vendor/backbone
-#= require ./vendor/tilt
 #= require ./core/mediator
 #= require ./core/motion
+#= require ./core/socket
 
 (->
 	MP = window.MP = {}
