@@ -14,7 +14,7 @@ class Socket
 		MP.mediator.trigger "data:#{type}", data.data
 		
 	send: (type, data)=> 
-		message = JSON.stringify(type: type, data: data)
+		message = JSON.stringify(_.extend({type:'update'}, data))
 		console.log "Send: #{message}"
 		@connection.send(message)
 		

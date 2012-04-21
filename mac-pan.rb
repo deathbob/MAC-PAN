@@ -36,7 +36,7 @@ EventMachine.run {
 
       ws.send JSON.generate(
         { :type => "create",
-          :data => new_player.to_json
+          :data => new_player.as_json
         }
       )
     }
@@ -57,8 +57,7 @@ EventMachine.run {
       player = state[:players][data["id"]]
       player.current_coordinates += moves[data["move"].intern]
 
-      ws.send JSON.generate(state)
-      #ws.send JSON.generate({:pinky => {:coordinates =>pinky_position}})
+      ws.send JSON.generate({:type => 'update', :data => player.as_json})
     }
   end
 }
