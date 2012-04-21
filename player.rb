@@ -4,7 +4,7 @@ require 'JSON'
 class Player
   attr_accessor :current_coordinates
   attr_accessor :current_direction
-  attr_accessor :type
+  attr_accessor :character
   attr_accessor :id
   
   def initialize(character_name)
@@ -19,7 +19,7 @@ class Player
       current_x: current_coordinates.first,
       current_y: current_coordinates.last,
       current_direction: current_direction,
-      type: type,
+      character: type,
       id: id
     }
   end
