@@ -9,10 +9,12 @@ class Player extends Backbone.Model
 	
 	initialize:-> 
 		@view = new MP.PlayerView(model: @)
-		@view.render()		
 		MP.mediator.on('data:create', @setup)
 	
-	setup:(data)=> @set(data)
+	setup:(data)=> 
+		@set(data)
+		@view.render()
+		
 	save:()=> MP.Socket.send('update', @toJSON())
 	
 MP.Player = Player

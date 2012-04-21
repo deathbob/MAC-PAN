@@ -78,23 +78,26 @@ EventMachine.run {
       )
     }
 
-    ws.onclose { puts "Connection closed" }
+    ws.onclose { 
+      puts "Connection closed" 
+
+      state[:players].delete(sockets[ws.hash])
+
+    }# be nice to delete the player who left from the global state here
     ws.onmessage { |msg|
       puts "Recieved message: #{msg}"
-      begin
-        data = JSON.parse(msg)
-      rescue
-        data = []
-      end
-      puts data["id"]
+    begin
+      data = JSON.parse(msg)
+    rescue
+      data = []
+    end
+      player = state[:players][data["id"]]
+      
 
       puts data["move"]
       player = state[:players][data["id"]]
-      puts player.current_coordinates.inspect
-      #player.current_coordinates += moves[data["move"].intern]
       player.last_move = data["move"]
     }
-    #binding.pry
   end
 }
 

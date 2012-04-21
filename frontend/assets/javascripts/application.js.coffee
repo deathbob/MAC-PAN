@@ -17,7 +17,8 @@
 		config:
 			server:
 				port: 8888
-				host: getHost()
+#				host: "macpan.kurbmedia.com"#getHost()
+				host: getHost()				
 				path: '/'
 			poll: 100
 )()
@@ -51,8 +52,10 @@ init = ()->
 			move = 'right'
 		else if key == 40 
 			move = 'down'
-		MP.User.set('move', move)
-		MP.User.save()
+		
+		if MP.User.get('current_direction') != move
+			MP.User.set('move', move)
+			MP.User.save()
 	)
 
 

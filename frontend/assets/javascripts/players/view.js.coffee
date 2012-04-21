@@ -5,15 +5,16 @@ class Player extends Backbone.View
 	initialize:-> 
 		@model.on('change:current_x', @moveHoriz)
 		@model.on('change:current_y', @moveVert)
+		@model.on('destroy', @remove)
 		
 	moveHoriz:=> @$el.css(left: @model.get('current_x'))
-	moveVert:=>	@$el.css(top: @model.get('current_y'))
+	moveVert:=>	 @$el.css(top: @model.get('current_y'))
 	animate:=>
-		
+
 	render:=>
 		super
 		$('#board').append(@$el)
-		@$el.addClass(@model.get("type"))
+		@$el.addClass(@model.get("character"))
 		@moveHoriz()
 		@moveVert()
 		
