@@ -5,13 +5,15 @@ class Player
   attr_accessor :current_coordinates
   attr_accessor :current_direction
   attr_accessor :character
-  attr_accessor :id
+  attr_accessor :id, :alive, :powered_up
   
   def initialize(character_name)
     self.id = SecureRandom.uuid
     self.character = character_name
     self.current_direction = nil
     self.current_coordinates = Vector[0, 0]
+    self.alive = true
+    self.powered_up = false
   end
 
   def as_json
