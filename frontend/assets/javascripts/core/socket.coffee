@@ -3,7 +3,7 @@ class Socket
 	constructor: (options)->
 		@connection ||= new WebSocket("ws://#{options.host}:#{options.port}/#{options.path}")
 		@connection.onmessage = @receive
-		@connection.onclose 	= @destroy
+		#@connection.onclose 	= @destroy
 	
 	destroy: (player) => @send('destroy', player.toJSON())
 	

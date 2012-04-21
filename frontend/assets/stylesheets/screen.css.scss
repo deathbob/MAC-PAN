@@ -1,6 +1,6 @@
 a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, p, pre, q, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video{border:0;font:inherit;font-size:100%;margin:0;outline:0;padding:0;vertical-align:baseline}
 article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section{display:block}
+footer, header, hgroup, menu, nav, section{ display:block; }
 body{line-height:1}
 ol, ul{list-style:none}
 blockquote, q{quotes:none}
@@ -11,8 +11,12 @@ table{border-collapse:collapse;border-spacing:0}
 
 body, input, select, textarea{ font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:11px; line-height:18px; }
 
-html,body{ margin:0; padding:0; min-height:99.9%; width:100%; background:black; }
-#board{ background:black; width:600px; height:900px; position:relative; margin:0 auto; }
+html,body{ margin:0; padding:0; height:100%; width:100%; background:#444; position:relative; }
+
+#board{ background:black; height:600px; width:900px; position:relative; margin:0 auto; border-radius:10px; position:absolute; 
+	left:50%; margin-left:-450px; top:50%; margin-top:-300px;
+}
+
 span.player{ display:block; position:absolute; width:30px; height:30px; 
 	background-size:auto 100%; background:url("/assets/ghost.svg") no-repeat;
 	&.self{ background:url("/assets/pac-man.svg") no-repeat; }

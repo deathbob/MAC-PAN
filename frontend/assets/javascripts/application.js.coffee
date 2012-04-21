@@ -1,9 +1,11 @@
 #= require_self
 #= require ./vendor/underscore
 #= require ./vendor/backbone
+#= require ./vendor/raphael
 #= require ./core/mediator
 #= require ./core/motion
 #= require ./core/socket
+#= require ./ui/board
 #= require ./players/player
 #= require ./players/players
 #= require ./players/view
@@ -23,6 +25,7 @@ $(()->
 	valid_keys = [38, 37, 40, 39]
 	
 	socket  	 = new MP.Socket(MP.config.server)
+	MP.Board	 = new MP.Board()
 	MP.User 	 = new MP.Player(socket: socket)
 	MP.Motion  = new MP.Motion()
 	MP.Players = new MP.Players(socket: socket)
@@ -34,13 +37,18 @@ $(()->
 		MP.User.save()
 			
 	$(document).on('keyup', (event)->
-		return false if valid_keys.indexOf(event.which) == -1
+		if valid_keys.indexOf(event.which) == -1
+			return false 
 		key = event.which
 		move = null
-		if key == 37 move = "left" 
-		else if key == 38 move = "up"
-		else if key == 39 move = 'right'
-		else if key == 40 move = 'down'
+		if key == 37 
+			move = "left" 
+		else if key == 38 
+			move = "up"
+		else if key == 39 
+			move = 'right'
+		else if key == 40 
+			move = 'down'
 		MP.User.set('move', move)
 		MP.User.save()
 	)
