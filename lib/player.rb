@@ -25,7 +25,7 @@ class Player
     {
       current_x: current_coordinates[0],
       current_y: current_coordinates[1],
-      current_direction: current_direction,
+      current_direction: last_move,
       character: character,
       id: id
     }
