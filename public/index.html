@@ -63,7 +63,10 @@
           obj = JSON.stringify(obj);
           ws.send(obj);
           $("ul#messages").prepend("<li>SENT: "+str+"</li>");
-          if(str=="down"){
+          if(str=="down"){ // This is just a placeholder;
+            // we'll need the server to send us dead pellet coordinates,
+            // presumably, something like "kill(0,1)"
+            // to tell us which pellet to .hide()
             var deadPellet = $('.pellet[data-x="0"][data-y="1"]');
             deadPellet.css("background","red")
           }
