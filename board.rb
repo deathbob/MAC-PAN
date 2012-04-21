@@ -1,5 +1,4 @@
 class Board
-
   attr_accessor :ghost_coordinates, :macpan_coordinates, :pellet_coordinates, :valid_coordinates
 
   def ghost_coordinates
@@ -21,5 +20,4 @@ class Board
   def valid?(location)
     valid_coordinates.include?(location)
   end
-
 end
