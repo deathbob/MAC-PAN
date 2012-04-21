@@ -15,12 +15,44 @@
     <div class="pellet" data-x="1" data-y="0" data-visible="true"></div>
     <div class="pellet" data-x="2" data-y="0" data-visible="false"></div>
     <div class="pellet" data-x="3" data-y="0" data-visible="true"></div>
+
+	  <div class="pellet" data-x="0" data-y="1" data-visible="true"></div>
+    <div class="pellet" data-x="1" data-y="1" data-visible="true"></div>
+    <div class="pellet" data-x="2" data-y="1" data-visible="false"></div>
+    <div class="pellet" data-x="3" data-y="1" data-visible="true"></div>
+
+	  <div class="pellet" data-x="0" data-y="2" data-visible="true"></div>
+    <div class="pellet" data-x="1" data-y="2" data-visible="true"></div>
+    <div class="pellet" data-x="2" data-y="2" data-visible="false"></div>
+    <div class="pellet" data-x="3" data-y="2" data-visible="true"></div>
+
+	  <div class="pellet" data-x="0" data-y="3" data-visible="true"></div>
+    <div class="pellet" data-x="1" data-y="3" data-visible="true"></div>
+    <div class="pellet" data-x="2" data-y="3" data-visible="true"></div>
+    <div class="pellet" data-x="3" data-y="3" data-visible="false"></div>
+
+	  <div class="pellet" data-x="0" data-y="4" data-visible="false"></div>
+    <div class="pellet" data-x="1" data-y="4" data-visible="true"></div>
+    <div class="pellet" data-x="2" data-y="4" data-visible="true"></div>
+    <div class="pellet" data-x="3" data-y="4" data-visible="true"></div>
     
     <script>
       $(document).ready(function(){
 
+        var i = 0;
+        $('.pellet').each(function(){
+          if($(this).data('visible')){
+            var x = $(this).data('x') * 20;
+            var y = $(this).data('y') * 20;
+          $(this).css({left:x, top:y})
+        }else{
+          $(this).hide();
+        }
+
+        });
+
         ws = new WebSocket("ws://localhost:8888");
-        ws.onmessage = function(evt) { $("ul#messages").prepend("<li>RESPONSE: "+evt.data+"</li>"); };
+        ws.onmessage = function(evt) {$("ul#messages").prepend("<li>RESPONSE: "+evt.data+"</li>");};
         ws.onclose = function() { echo("socket closed"); };
         ws.onopen = function() {
           echo("connected...");
@@ -31,6 +63,10 @@
           obj = JSON.stringify(obj);
           ws.send(obj);
           $("ul#messages").prepend("<li>SENT: "+str+"</li>");
+          if(str=="down"){
+            var deadPellet = $('.pellet[data-x="0"][data-y="1"]');
+            deadPellet.css("background","red")
+          }
         };
 
         $(document).keydown(function(e) {

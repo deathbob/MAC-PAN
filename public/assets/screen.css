@@ -20,3 +20,5 @@ span.player{display:block;position:absolute;width:30px;height:30px;background:ur
 span.player.self{background:url("/assets/pac-man.svg?1334986857") no-repeat}
 
 .pellet{background:#eee;border-radius:3px;height:6px;overflow:hidden;position:absolute;width:6px;}
+
+#messages{background:#fff;height:100%;position:fixed;right:0;top:0;width:150px;z-index:100}
