@@ -72,3 +72,4 @@ private
     %w(pacman pinky blinky inky clyde)
   end
 end
+

@@ -11,17 +11,18 @@
 #= require ./players/view
 
 (->
+	getHost = ()-> window.location.host.toString().split(":").shift()
+	
 	MP = window.MP =
 		config:
 			server:
 				port: 8888
-				host: 'localhost'
+				host: getHost()
 				path: '/'
 			poll: 100
 )()
 
-$(()->
-
+init = ()->
 	valid_keys = [38, 37, 40, 39]
 	
 	MP.Board	 = new MP.Board()
@@ -37,7 +38,7 @@ $(()->
 		MP.User.set('move', { horiz: data.horiz, vert: data.vert })
 		MP.User.save()
 			
-	$(document).on('keydown', (event)->
+	$(document).on('keyup', (event)->
 		if valid_keys.indexOf(event.which) == -1
 			return false 
 		key = event.which
@@ -53,5 +54,8 @@ $(()->
 		MP.User.set('move', move)
 		MP.User.save()
 	)
-	
+
+
+$(()->
+	init()
 );
