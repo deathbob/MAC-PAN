@@ -12,7 +12,7 @@ css_path         = "/assets"
 fonts_path       = "/fonts"
 
 # On compile, use this folder. Accepts either a relative or absolute path
-compile_to  = "/Users/brent/Sites/sandbox/MAC-PAN/public"
+#compile_to  = "/Users/brent/Sites/sandbox/MAC-PAN/public"
 
 # Static files and assets will be served from this location
 public_path = "public"
