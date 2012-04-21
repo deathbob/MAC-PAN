@@ -20,8 +20,7 @@
 			poll: 100
 )()
 
-$(()->
-
+init = ()->
 	valid_keys = [38, 37, 40, 39]
 	
 	MP.Board	 = new MP.Board()
@@ -53,5 +52,8 @@ $(()->
 		MP.User.set('move', move)
 		MP.User.save()
 	)
+
+
+$(()->
 	
 );
