@@ -5,6 +5,7 @@ class Player extends Backbone.View
 	initialize:-> 
 		@model.on('change:current_x', @moveHoriz)
 		@model.on('change:current_y', @moveVert)
+		
 	moveHoriz:=> @$el.css(left: @model.get('current_x'))
 	moveVert:=>	@$el.css(top: @model.get('current_y'))
 	animate:=>
@@ -13,6 +14,7 @@ class Player extends Backbone.View
 		super
 		$('#board').append(@$el)
 		@$el.addClass(@model.get("type"))
-		@move()
+		@moveHoriz()
+		@moveVert()
 		
 MP.PlayerView = Player
