@@ -77,15 +77,21 @@ EventMachine.run {
     ws.onclose { 
       # be nice to delete the player who left from the global state here
       puts "Connection closed" 
-      id = ""
+      id = ''
+      char_to_add = nil
       state[:players].each do |k, v|
-        id = k if v.ws == ws
+        if v.ws == ws
+          id = k 
+          char_to_add = v.character
+        end
         clients.each do |other|
           other.send JSON.generate({ :type => "destroy",  :data => v.as_json })
         end
-        characters.push(v.character).uniq!
       end
-      state[:players].delete(id) if id
+      if id
+        state[:players].delete(id) 
+        characters = characters.push(char_to_add).compact.uniq
+      end
     }
     
     ws.onmessage { |msg|
