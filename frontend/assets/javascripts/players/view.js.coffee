@@ -14,7 +14,10 @@ class Player extends Backbone.View
 	setClass:=>
 		@$el.removeClass("up down left right")
 			.addClass(@model.get('current_direction'))
-			
+	remove:=>
+		super
+		delete @model
+		
 	render:=>
 		super
 		$('#board').append(@$el)

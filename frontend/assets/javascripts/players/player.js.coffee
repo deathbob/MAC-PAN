@@ -1,4 +1,5 @@
 class Player extends Backbone.Model
+	sync:->
 	socket: null
 	defaults: 
 		current_x: 0 

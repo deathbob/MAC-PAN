@@ -1,5 +1,6 @@
 class Players extends Backbone.Collection
 	model: MP.Player
+	sync:->
 	initialize:-> 
 		MP.mediator.on('data:update', @receive)
 		MP.mediator.on('data:destroy', @drop)
