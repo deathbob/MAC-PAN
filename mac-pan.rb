@@ -4,9 +4,15 @@ require "eventmachine"
 require "em-websocket"
 require "ruby-debug"
 require 'json'
+require 'matrix'
 
 
-pinky_position = [0,0]
+pinky_position = Vector[0,0]
+scale = 5
+moves = {:up => Vector[0,-scale],
+:down => Vector[0,scale],
+:left => Vector[-scale,0],
+:right => Vector[scale,0]}
 
 EventMachine.run {
   EventMachine::WebSocket.start(:host => "127.0.0.1", :port => 8888) do |ws|
@@ -30,9 +36,16 @@ EventMachine.run {
     end
       #do somethin
       #ws.send JSON.generate(data)
+      puts data[0]["move"]
       # send new coordinates for that character
-      pinky_position[0]  = pinky_position[0] + 1
-      ws.send JSON.generate({:pinky => {:coordinates =>pinky_position}})
+      pinky_position += moves[data[0]["move"].intern]
+      ws.send JSON.generate(
+        [
+          { player: true, id: 1, x: 10, y:10 },
+          { player: false, id: 2, x: pinky_position[0], y: pinky_position[1] },
+        ]
+      )
+      #ws.send JSON.generate({:pinky => {:coordinates =>pinky_position}})
     }
   end
 }
