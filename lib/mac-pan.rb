@@ -1,11 +1,13 @@
-require "bundler/setup"
-Bundler.setup
+require 'bundler/setup'
+Bundler.require(:default)
+
+$LOAD_PATH.unshift(File.dirname(__FILE__))  
+
 require "eventmachine"
 require "em-websocket"
-require "ruby-debug"
 require 'json'
 require 'matrix'
-require './player'
+require 'player'
 
 state = {
   :players => { 
@@ -25,7 +27,7 @@ moves = {
 characters = %w(pacman pinky blinky inky clyde)
 
 EventMachine.run {
-  EventMachine::WebSocket.start(:host => "127.0.0.1", :port => 8888) do |ws|
+  EventMachine::WebSocket.start(:host => "0.0.0.0", :port => 8888) do |ws|
     ws.onopen {
       # the 'current' player should have :player => true to separate it from 
       # oppoents.

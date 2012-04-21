@@ -1,5 +1,5 @@
 require 'securerandom'
-require 'JSON'
+require 'json'
 
 class Player
   attr_accessor :current_coordinates
