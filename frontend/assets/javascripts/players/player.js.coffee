@@ -1,5 +1,5 @@
 class Player extends Backbone.Model
-	sync:-> @collection.sync()
+	sync:-> MP.Players.sync()
 	defaults: 
 		x: 0, 
 		y: 0, 

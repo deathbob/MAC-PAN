@@ -13,14 +13,31 @@
 )()
 
 $(()->
+	
+	valid_keys = [38, 37, 40, 39]
+	init = false
+	
 	MP.Motion = new MP.Motion()
 	MP.Players = new MP.Players()
 	MP.Players.on('reset', (coll)->
-		unless MP.User
-			MP.User = coll.detect (player)->  player.get('player') == true
-			MP.mediator.on 'devicemotion', (data)->
-				MP.User.set('move', { horiz: data.horiz, vert: data.vert })
-				MP.User.save()
+		MP.User = coll.detect (player)->  player.get('player') == true
+	)
+	
+	MP.mediator.on 'devicemotion', (data)->
+		return false unless MP.User
+		MP.User.set('move', { horiz: data.horiz, vert: data.vert })
+		MP.User.save()
+	
+	$(document).on('keyup', (event)->
+		return false unless MP.User and valid_keys.indexOf(event.which) != -1
+		key = event.which
+		moves = {}
+		if key == 37 or key == 39
+			moves.horiz = if key is 37 then 'L' else 'R'
+		else moves.vert = if key is 38 then 'U' else 'D'
+		
+		MP.User.set('move', moves)
+		MP.User.save()
 	)
 	
 );

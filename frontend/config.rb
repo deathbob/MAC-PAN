@@ -12,14 +12,15 @@ css_path         = "/assets"
 fonts_path       = "/fonts"
 
 # On compile, use this folder. Accepts either a relative or absolute path
-compile_to  = "compiled"
+compile_to  = "/Users/brent/Sites/sandbox/MAC-PAN/public"
 
 # Static files and assets will be served from this location
 public_path = "public"
 
 # Configure assets to be compiled at compile-time (default: screen.css and site.js)
 #
-compile.assets << "site.js"
+compile.compress_javascripts = false
+compile.assets << "application.js"
 compile.assets << "screen.css"
 
 # By default template compilation will generate files as they exist in your /views directory. 
