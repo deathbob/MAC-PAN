@@ -4,7 +4,7 @@ class Player extends Backbone.Model
 		current_x: 0 
 		current_y: 0
 		move: null
-		type: null
+		character: null
 		current_direction: null
 	
 	initialize:-> 
