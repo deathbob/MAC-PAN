@@ -80,11 +80,9 @@ EventMachine.run {
       id = ""
       state[:players].each do |k, v|
         id = k if v.ws == ws
-        ws.send JSON.generate(
-          { :type => "destroy", 
-            :data => v
-          }
-        )
+        clients.each do |other|
+          other.send JSON.generate({ :type => "destroy",  :data => v })
+        end
         characters.unshift v.character
       end
       state[:players].delete(id) if id

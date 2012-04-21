@@ -9,7 +9,6 @@ class Players extends Backbone.Collection
 		player.destroy() if player
 		
 	receive: (data)=>
-		console.log data
 		for player in data
 			curr = @get(player.id)
 			if curr 
