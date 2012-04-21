@@ -8533,7 +8533,6 @@ window.Raphael.vml && function (R) {
       var data, type;
       data = JSON.parse(message.data);
       type = data.type;
-      console.log("Received " + message.data);
       return MP.mediator.trigger("data:" + type, data.data);
     };
 
@@ -8542,7 +8541,6 @@ window.Raphael.vml && function (R) {
       message = JSON.stringify(_.extend({
         type: 'update'
       }, data));
-      console.log("Send: " + message);
       return this.connection.send(message);
     };
 
@@ -8679,7 +8677,6 @@ window.Raphael.vml && function (R) {
 
     Players.prototype.receive = function(data) {
       var curr, player, _i, _len;
-      console.log(data);
       for (_i = 0, _len = data.length; _i < _len; _i++) {
         player = data[_i];
         curr = this.get(player.id);
