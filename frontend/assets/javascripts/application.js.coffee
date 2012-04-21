@@ -31,7 +31,7 @@ init = ()->
 	MP.Motion  = new MP.Motion()
 	MP.Players = new MP.Players()	
 	MP.Socket  = new MP.Socket(MP.config.server)
-	MP.Players.add(MP.User)
+	MP.Players.add(MP.Usert
 	
 	MP.mediator.on 'devicemotion', (data)->
 		return false if MP.User is null

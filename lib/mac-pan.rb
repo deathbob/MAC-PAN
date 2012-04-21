@@ -76,9 +76,15 @@ EventMachine.run {
 
     ws.onclose { 
       puts "Connection closed" 
+      id = ""
+      state[:players].each do |k, v|
+        id = k if v.ws == ws
+        characters.unshift v.character
+      end
+      puts characters
+      state[:players].delete(id) if id
 
-      state[:players].delete(sockets[ws.hash])
-
+      puts state
     }# be nice to delete the player who left from the global state here
     ws.onmessage { |msg|
       puts "Recieved message: #{msg}"
