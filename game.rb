@@ -1,5 +1,7 @@
 require 'securerandom'
 require './player'
+require './board'
+require 'ruby-debug'
 
 class Game
   @@games = {}
@@ -10,8 +12,13 @@ class Game
     @id = SecureRandom.uuid
     @players = {}
     @characters_left = default_characters.clone
+    @board = Board.new(File.open("./maps/default.map", "r").read)
 
     return (@@games[@id] = self)    
+  end
+
+  def board
+    @board
   end
 
   def add_player!
@@ -20,22 +27,31 @@ class Game
     @players[player.id] = player
   end
 
+  def remove_player! id
+    raise "You must deactivate player first!" if lookup_player(id).active?
+    @players.delete(id)
+  end
+
   def players
     @players.values
   end
 
-  def find_player id
+  def lookup_player id
     @players[id]
   end
 
-  def self.find_game id
+  def self.lookup_game id
     @@games[id]
   end
 
-  def self.find_player id
+  def self.lookup_player id
     active_games.map { |g|
-      g.find_player id
-    }.compact
+      g.lookupplayer id
+    }.compact.first
+  end
+
+  def self.lookup_by_player_id id
+    active_games.detect { |g| g.lookup_player id }
   end
 
   def self.active_games
