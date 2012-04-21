@@ -10,8 +10,8 @@ class Socket
 	receive: (message)=> 
 		data = JSON.parse(message.data)
 		type = data.type
-		console.log "Received: #{data}"
-		MP.mediator.trigger "data:#{type}", [data.data]
+		console.log "Received #{message.data}"
+		MP.mediator.trigger "data:#{type}", data.data
 		
 	send: (type, data)=> 
 		message = JSON.stringify(type: type, data: data)

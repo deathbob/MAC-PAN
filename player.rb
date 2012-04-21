@@ -15,12 +15,12 @@ class Player
   end
 
   def to_json
-    JSON.generate({
+    {
       current_x: current_coordinates.first,
       current_y: current_coordinates.last,
       current_direction: current_direction,
       type: type,
       id: id
-    })
+    }
   end
 end

@@ -24,11 +24,12 @@ $(()->
 
 	valid_keys = [38, 37, 40, 39]
 	
-	socket  	 = new MP.Socket(MP.config.server)
 	MP.Board	 = new MP.Board()
-	MP.User 	 = new MP.Player(socket: socket)
+	MP.User 	 = new MP.Player()
 	MP.Motion  = new MP.Motion()
-	MP.Players = new MP.Players(socket: socket)
+	MP.Players = new MP.Players()	
+	MP.Socket  = new MP.Socket(MP.config.server)
+	
 	
 	MP.mediator.on 'devicemotion', (data)->
 		return false if MP.User is null
