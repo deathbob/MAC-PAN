@@ -16,7 +16,7 @@ $(()->
 	
 	valid_keys = [38, 37, 40, 39]
 	init = false
-	
+	MP.User = null
 	MP.Motion = new MP.Motion()
 	MP.Players = new MP.Players()
 	MP.Players.on('reset', (coll)->
@@ -24,12 +24,13 @@ $(()->
 	)
 	
 	MP.mediator.on 'devicemotion', (data)->
-		return false unless MP.User
+		return false if MP.User is null
+		return false if data is null
 		MP.User.set('move', { horiz: data.horiz, vert: data.vert })
 		MP.User.save()
 	
 	$(document).on('keyup', (event)->
-		return false unless MP.User and valid_keys.indexOf(event.which) != -1
+		return false if MP.User is null or valid_keys.indexOf(event.which) == -1
 		key = event.which
 		moves = {}
 		if key == 37 or key == 39
