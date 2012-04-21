@@ -17,7 +17,6 @@
 		config:
 			server:
 				port: 8888
-				#host: "localhost"#getHost()
 				host: "macpan.kurbmedia.com"#getHost()
 				#host: getHost()
 				path: '/'
