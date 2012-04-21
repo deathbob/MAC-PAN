@@ -1,14 +1,7 @@
 class Players extends Backbone.Collection
 	model: MP.Player
-	connection: null
-	sync:-> @connection.send(JSON.stringify(@toJSON()))
-		
-	initialize:->
-		MP.mediator.on('receive', @receive)
-		@connection ||= new MP.Socket({ host: 'localhost', port: 8888, path: '' });
-		
-	receive: (msg)=>
-		data = JSON.parse(msg)
+	initialize:-> MP.mediator.on('data:update', @receive)
+	receive: (data)=>
 		for player in data
 			curr = @get(player.id)
 			if curr 

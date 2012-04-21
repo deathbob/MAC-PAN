@@ -1,5 +1,5 @@
 class Player extends Backbone.Model
-	sync:-> MP.Players.sync()
+	socket: null
 	defaults: 
 		x: 0, 
 		y: 0, 
@@ -9,5 +9,7 @@ class Player extends Backbone.Model
 	initialize:-> 
 		@view = new MP.PlayerView(model: @)
 		@view.render()
+	
+	save:()=> @socket.send('update', @toJSON())
 	
 MP.Player = Player
