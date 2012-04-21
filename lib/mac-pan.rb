@@ -5,7 +5,6 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 
 require "eventmachine"
 require "em-websocket"
-#require "ruby-debug"
 require 'json'
 require 'matrix'
 require 'player'
