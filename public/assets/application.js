@@ -10,7 +10,7 @@
       config: {
         server: {
           port: 8888,
-          host: "macpan.kurbmedia.com",
+          host: getHost(),
           path: '/'
         },
         poll: 100
@@ -34,10 +34,7 @@
       if (data === null) {
         return false;
       }
-      MP.User.set('move', {
-        horiz: data.horiz,
-        vert: data.vert
-      });
+      MP.User.set('move', data.moves);
       return MP.User.save();
     });
     return $(document).on('keyup', function(event) {
@@ -64,11 +61,7 @@
   };
 
   $(function() {
-    return $("#board").one('click', function(event) {
-      $('#board').removeClass('splash');
-      $('#muzak').get(0).play();
-      return init();
-    });
+    return init();
   });
 
 }).call(this);
@@ -8487,18 +8480,30 @@ window.Raphael.vml && function (R) {
     };
 
     Motion.prototype.onDeviceMotion = function(event) {
-      var ax, ay, az, tilt, yaw;
+      var ax, ay, az, moves;
       ax = event.accelerationIncludingGravity.x.toFixed(1);
       ay = -event.accelerationIncludingGravity.y.toFixed(1);
       az = event.accelerationIncludingGravity.z.toFixed(1);
-      tilt = ay < 0 ? "L" : "R";
-      yaw = -ax < 4.5 ? "U" : "D";
+      if (Math.abs(ay) > Math.abs(az)) {
+        if (ay < 0) {
+          moves = 'left';
+        } else {
+          moves = "right";
+        }
+      } else {
+        if (az < 0) {
+          moves = 'up';
+        } else {
+          moves = 'down';
+        }
+      }
       return MP.mediator.trigger('devicemotion', {
         x: ax,
         y: ay,
         z: az,
         horiz: tilt,
-        vert: yaw
+        vert: yaw,
+        moves: moves
       });
     };
 
@@ -8621,7 +8626,9 @@ window.Raphael.vml && function (R) {
       current_y: 0,
       move: null,
       character: null,
-      current_direction: null
+      current_direction: null,
+      score: 0,
+      powered_up: false
     };
 
     Player.prototype.initialize = function() {
@@ -8721,6 +8728,10 @@ window.Raphael.vml && function (R) {
     function Player() {
       this.render = __bind(this.render, this);
 
+      this.flashPower = __bind(this.flashPower, this);
+
+      this.updateScore = __bind(this.updateScore, this);
+
       this.remove = __bind(this.remove, this);
 
       this.setClass = __bind(this.setClass, this);
@@ -8741,7 +8752,9 @@ window.Raphael.vml && function (R) {
       this.model.on('change:current_x', this.moveHoriz);
       this.model.on('change:current_y', this.moveVert);
       this.model.on('change:current_direction', this.setClass);
-      return this.model.on('destroy', this.remove);
+      this.model.on('destroy', this.remove);
+      this.model.on('change:score', this.updateScore);
+      return this.model.on('change:powered_up', this.flashPower);
     };
 
     Player.prototype.moveHoriz = function() {
@@ -8765,6 +8778,29 @@ window.Raphael.vml && function (R) {
     Player.prototype.remove = function() {
       Player.__super__.remove.apply(this, arguments);
       return delete this.model;
+    };
+
+    Player.prototype.updateScore = function() {
+      if (this.model.get('character') === 'pacman') {
+        return $('#macpan_score').html(this.model.get('score'));
+      } else if (this.model.get('character') === 'blinky') {
+        return $('#blinky_score').html(this.model.get('score'));
+      } else if (this.model.get('character') === 'clyde') {
+        return $('#clyde_score').html(this.model.get('score'));
+      } else if (this.model.get('character') === 'pinky') {
+        return $('#pinky_score').html(this.model.get('score'));
+      } else if (this.model.get('character') === 'inky') {
+        return $('#inky_score').html(this.model.get('score'));
+      }
+    };
+
+    Player.prototype.flashPower = function() {
+      if (this.model.get('powered_up') === true) {
+        $('.pacman').css("background-image", "url(/assets/pinky.png)");
+      }
+      if (this.model.get('powered_up') === false) {
+        return $('.pacman').css("background-image", "url(/assets/pac-man.gif)");
+      }
     };
 
     Player.prototype.render = function() {
