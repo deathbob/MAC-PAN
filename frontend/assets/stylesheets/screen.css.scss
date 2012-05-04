@@ -13,8 +13,8 @@ body, input, select, textarea{ font-family:'Helvetica Neue', Helvetica, Arial, s
 
 html,body{ margin:0; padding:0; height:100%; width:100%; background:#444; position:relative; }
 
-#board{ background:black image-url('level-map.svg'); height:600px; width:900px; position:relative; margin:0 auto; border-radius:10px; position:absolute; 
-	left:50%; margin-left:-450px; top:50%; margin-top:-300px; background-size:100% 100%;
+#board{ background:black image-url('level-map.svg'); margin:0 auto; border-radius:10px;
+	background-size:100% 100%; width:900px; height:600px;
 	&.splash{ background:image-url('splash.png') center no-repeat; }
 }
 
@@ -42,4 +42,11 @@ span.player{ display:block; position:absolute; width:40px; height:40px; position
 	&.blinky{ background:url("/assets/blinky.png") no-repeat; }
 	&.inky{ background:url("/assets/inky.png") no-repeat; }
 	&.clyde{ background:url("/assets/clyde.png") no-repeat; }
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+	html, body{ width:480px; height:320px; }
+	#board{ width:100%; height:100%; position:static; margin:0 auto;}
+	span.player{ width:15px; height:15px; }
 }

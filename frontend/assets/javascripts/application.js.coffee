@@ -17,8 +17,8 @@
 		config:
 			server:
 				port: 8888
-				host: "macpan.kurbmedia.com"#getHost()
-				#host: getHost()
+#				host: "macpan.kurbmedia.com"#getHost()
+				host: getHost()
 				path: '/'
 			poll: 100
 )()
@@ -36,7 +36,7 @@ init = ()->
 	MP.mediator.on 'devicemotion', (data)->
 		return false if MP.User is null
 		return false if data is null
-		MP.User.set('move', { horiz: data.horiz, vert: data.vert })
+		MP.User.set('move', data.moves)
 		MP.User.save()
 			
 	$(document).on 'keyup', (event)->
@@ -60,6 +60,6 @@ init = ()->
 $(()->
 	$("#board").one 'click', (event)->
 		$('#board').removeClass('splash')
-		$('#muzak').get(0).play();
+	#	$('#muzak').get(0).play();
 		init()
 )

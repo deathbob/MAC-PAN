@@ -30,9 +30,20 @@ class Motion
 		ax = event.accelerationIncludingGravity.x.toFixed(1);
 		ay = -event.accelerationIncludingGravity.y.toFixed(1);
 		az = event.accelerationIncludingGravity.z.toFixed(1);
-		tilt = if ay < 0 then "L" else "R"
-		yaw  = if -ax < 4.5  then "U" else "D"
-		MP.mediator.trigger 'devicemotion', { x: ax, y: ay, z: az, horiz: tilt, vert: yaw }
+		if Math.abs(ay) > Math.abs(az)
+			if ay < 0 
+				moves = 'left'
+			else 
+				moves = "right"
+		else
+			if az < 0
+				moves = 'up'
+			else 
+				moves = 'down'
+		# tilt = if ay < 0 then "left" else "right"
+		# yaw  = if -ax < 4.5  then "up" else "down"
+		# moves = if ax < 3 and ax > -3 then yaw else tilt
+		MP.mediator.trigger 'devicemotion', { x: ax, y: ay, z: az, horiz: tilt, vert: yaw, moves: moves }
 
 	onOrientationChange: (event) =>
 		orient = if Math.abs(window.orientation) == 90 then 'landscape' else 'portrait'
