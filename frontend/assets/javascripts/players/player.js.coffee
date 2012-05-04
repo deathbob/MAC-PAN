@@ -7,6 +7,8 @@ class Player extends Backbone.Model
 		move: null
 		character: null
 		current_direction: null
+		score: 0
+		powered_up: false
 	
 	initialize:-> 
 		@view = new MP.PlayerView(model: @)

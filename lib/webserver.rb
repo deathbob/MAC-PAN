@@ -15,5 +15,8 @@ def start_webrick(config = {})
   server.start
 
 end
+
+doc_root = File.expand_path(File.join([File.dirname(__FILE__), "..", "public"]))
+puts "serving up #{doc_root}"
   
-start_webrick(:DocumentRoot => File.join([File.dirname(__FILE__), "public"]))
+start_webrick(:DocumentRoot => doc_root)

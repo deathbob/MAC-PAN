@@ -17,7 +17,6 @@
 		config:
 			server:
 				port: 8888
-#				host: "macpan.kurbmedia.com"#getHost()
 				host: getHost()
 				path: '/'
 			poll: 100
@@ -58,8 +57,8 @@ init = ()->
 			MP.User.save()
 			
 $(()->
-	$("#board").one 'click', (event)->
-		$('#board').removeClass('splash')
-	#	$('#muzak').get(0).play();
+    # $("#board").one 'click', (event)->
+      # $('#board').removeClass('splash')
+    #         # $('#muzak').get(0).play();
 		init()
 )

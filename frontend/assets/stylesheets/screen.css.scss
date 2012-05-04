@@ -50,3 +50,11 @@ span.player{ display:block; position:absolute; width:40px; height:40px; position
 	#board{ width:100%; height:100%; position:static; margin:0 auto;}
 	span.player{ width:15px; height:15px; }
 }
+
+.score{background:white; height:50px; width:50px; color:black; font-size:30px}
+#clyde_score{background:yellow; color:white}
+#blinky_score{background:red; color:white}
+#inky_score{background:blue; color:white}
+#pinky_score{background:#FF69B4; color:white}
+
+.powerup{background:white; width: 10px; height: 10px; position:absolute}
