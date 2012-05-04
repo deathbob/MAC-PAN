@@ -43,3 +43,18 @@ span.player{ display:block; position:absolute; width:40px; height:40px; position
 	&.inky{ background:url("/assets/inky.png") no-repeat; }
 	&.clyde{ background:url("/assets/clyde.png") no-repeat; }
 }
+
+.score{background:white; height:50px; width:50px; color:black; font-size:30px}
+#clyde_score{background:yellow; color:white}
+#blinky_score{background:red; color:white}
+#inky_score{background:blue; color:white}
+#pinky_score{background:#FF69B4; color:white}
+
+.powerup{background:white; width: 10px; height: 10px; position:absolute}
+
+
+
+
+
+
+

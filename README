@@ -34,3 +34,10 @@ SSH IN and pull with git
 git pull origin deploy (make sure you're on the deploy branch on the server)
 run bundle to pull new gems etc.
 
+
+
+TODO
+
+collision detection
+ai for ghosts
+give each character their own speed of movement.?
